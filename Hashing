@@ -17,3 +17,37 @@ function findHashWithPrefix(prefix) {
 const result = findHashWithPrefix('00000');
 console.log(`Input: ${result.input}`);
 console.log(`Hash: ${result.hash}`);
+
+
+-----
+
+const crypto = require('crypto');
+
+// Function to find an input string that produces a hash starting with '00000'
+function findHashWithPrefix(prefix) {
+    let input = 0;
+    while (true) {
+        let inputStr = "100xdevs" + input.toString();
+        let hash = crypto.createHash('sha256').update(inputStr).digest('hex');
+        if (hash.startsWith(prefix)) {
+            return { input: inputStr, hash: hash };
+        }
+        input++;
+    }
+}
+
+// Find and print the input string and hash
+const result = findHashWithPrefix('00000');
+console.log(`Input: ${result.input}`);
+console.log(`Hash: ${result.hash}`);
+
+
+-------
+
+//nonce
+//Nonce: A nonce is a random or pseudo-random number used once in cryptographic communication. 
+//In blockchain and proof-of-work systems (like Bitcoin), a nonce is used to find a hash that meets a specific requirement,
+//such as having a certain number of leading zeros.
+
+//Proof of Work: This is a computational puzzle that involves finding a nonce that, when combined with a block of data, 
+//produces a hash with specific properties. This ensures that work has been done to generate the hash, making it difficult and time-consuming to reverse or forge the data.
